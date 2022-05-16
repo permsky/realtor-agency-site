@@ -99,3 +99,6 @@ class Owner(models.Model):
         Flat,
         verbose_name='квартиры в собственности'
     )
+
+    def __str__(self):
+        return f'ФИО: {self.name} Телефон: {self.pure_phonenumber}'
