@@ -61,7 +61,8 @@ class Flat(models.Model):
     owner_pure_phone = PhoneNumberField(
         'нормализованный номер владельца',
         region='RU',
-        blank=True
+        blank=True,
+        null=True
     )
 
     def __str__(self):

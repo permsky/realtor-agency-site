@@ -8,10 +8,14 @@ class Migration(migrations.Migration):
     def normalize_phonenumbers(apps, schema_editor):
         Flat = apps.get_model('property', 'Flat')
         for flat in Flat.objects.all():
-            flat.owner_pure_phone = phonenumbers.parse(
+            parsed_phonenumber = phonenumbers.parse(
                 flat.owners_phonenumber,
                 region='RU'
             )
+            if phonenumbers.is_valid_number(parsed_phonenumber):
+                flat.owner_pure_phone = parsed_phonenumber
+            else:
+                flat.owner_pure_phone = None
             flat.save()
 
     dependencies = [
