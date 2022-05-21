@@ -6,9 +6,11 @@ from django.db import migrations
 class Migration(migrations.Migration):
     def set_new_building(apps, schema_editor):
         Flat = apps.get_model('property', 'Flat')
-        for flat in Flat.objects.all():
-            flat.new_building = flat.construction_year > 2014
-            flat.save()
+        flats = Flat.objects.all()
+        if flats.exists():
+            for flat in flats.iterator():
+                flat.new_building = flat.construction_year > 2014
+                flat.save()
 
     dependencies = [
         ('property', '0003_flat_new_building'),
