@@ -76,7 +76,7 @@ class Complaint(models.Model):
         verbose_name='Квартира, на которую пожаловались',
         related_name='complaints'
     )
-    complaint_text = models.TextField('Текст жалобы')
+    text = models.TextField('Текст жалобы')
 
     def __str__(self):
         return f'Жалоба от {self.user} на квартиру {self.flat}'
@@ -92,7 +92,7 @@ class Owner(models.Model):
         null=True,
         db_index=True
     )
-    owner_flats = models.ManyToManyField(
+    flats = models.ManyToManyField(
         Flat,
         verbose_name='квартиры в собственности',
         db_index=True,
